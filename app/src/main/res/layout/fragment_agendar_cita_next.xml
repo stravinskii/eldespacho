@@ -1,0 +1,116 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context="me.stravinskii.eldespacho.AgendarCitaNextFragment">
+
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="60dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/notificacion"
+        android:id="@+id/textNotificacion"
+        android:layout_gravity="left|top" />
+
+    <RadioButton
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMS"
+        android:id="@+id/radioButtonSms"
+        android:layout_gravity="left" />
+
+    <RadioButton
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:id="@+id/radioButtonEmail"
+        android:layout_gravity="center_horizontal" />
+
+    <RadioButton
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notificacion"
+        android:id="@+id/radioButtonNotificacion"
+        android:layout_gravity="right" />
+
+    <Button
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Archivo"
+        android:id="@+id/buttonArchivo"
+        android:layout_gravity="left|center_vertical" />
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextArchivo"
+        android:text="archivo.dxf"
+        android:layout_gravity="right|center_vertical" />
+
+    <ImageView
+        android:id="@+id/driveIcon"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/driveLabel"
+        android:text="Google Drive"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"/>
+
+    <ImageView
+        android:id="@+id/dropboxIcon"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="70dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/dropboxLabel"
+        android:text="Dropbox"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="70dp"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:id="@+id/buttonCancelar"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="60dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agendar"
+        android:id="@+id/buttonAgendar"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="50dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+</FrameLayout>

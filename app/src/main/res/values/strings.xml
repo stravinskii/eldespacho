@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">El Despacho</string>
+    <string name="title_horarios">Horarios</string>
+    <string name="title_agendarcita">Agendar Cita</string>
+    <string name="title_miscitas">Mis Citas</string>
+    <string name="title_ubicacion">Ubicación</string>
+    <string name="title_configuracion">Configuración</string>
+    <string name="title_cerrarsesion">Cerrar Sesión</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_intro">Intro</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="welcome_intro">        Funcionamos las 24 hrs\n
+        Se cobra por minuto exacto\n
+        ¡Agenda tu cita desde tu celular!\n
+        ¡Ve el estado de tu pedido en tiempo real!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="siguiente">Siguiente</string>
+
+    <string name="cita1">Corte - Mar 03 de Marzo - 00:00 - 03:00</string>
+    <string name="cita2">Corte - Vie 06 de Marzo - 07:00 - 09:00</string>
+
+    <string name="citaA">Mauricio García - Mar 03 de Marzo - 00:00 - 03:00</string>
+    <string name="citaB">Fernando Reyes - Vie 06 de Marzo - 07:00 - 09:00</string>
+    <string name="citaC">David Ondarza - Jue 26 de Marzo - 00:00 - 03:00</string>
+    <string name="citaD">Alan Ramírez - Vie 27 de Marzo - 07:00 - 09:00</string>
+    <string name="hello_admin_citas">Citas Agendadas</string>
+
+    <string name="notificacion">Notificacion:</string>
+
+
+</resources>
