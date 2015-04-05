@@ -2,39 +2,39 @@
 <items version="2" >
 
     <item
-        jar="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/pre-dexed/debug/classes-ac73213b29dbbe1269130b168f8984b72b32e599.jar" />
-    </item>
-    <item
-        jar="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-f6f06e2d46f02a2306cdffc356002b8c1a0c569d.jar" />
-    </item>
-    <item
-        jar="/home/mauricio/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="/Users/mauricio/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-6bb5d4cf4cf6047fb2b29955dfd7a47c00f70631.jar" />
+        <dex dex="/Users/mauricio/Documents/eldespacho/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-2147c393a033924a856c23440a7251300e358622.jar" />
     </item>
     <item
-        jar="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/Users/mauricio/Documents/eldespacho/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/pre-dexed/debug/classes-1f9d0974910218d54220df707ca1c95eca18f20b.jar" />
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/mauricio/Documents/eldespacho/app/build/intermediates/pre-dexed/debug/classes-92b8a4feec39da520bf625b01a5d7fc2f1700059.jar" />
     </item>
     <item
-        jar="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
+        jar="/Users/mauricio/Documents/eldespacho/app/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="/home/mauricio/AndroidStudioProjects/ElDespacho/app/build/intermediates/pre-dexed/debug/classes-6ed9c36150bb8a2680c3072017557a34a93a3943.jar" />
+        <dex dex="/Users/mauricio/Documents/eldespacho/app/build/intermediates/pre-dexed/debug/classes-799efae8c4b18fea775e7b6a676d96d0390fd8f7.jar" />
+    </item>
+    <item
+        jar="/Users/mauricio/Documents/eldespacho/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/mauricio/Documents/eldespacho/app/build/intermediates/pre-dexed/debug/classes-e66354a9d2db8e6f579e79102cc1c2a4a6543585.jar" />
+    </item>
+    <item
+        jar="/Users/mauricio/Documents/eldespacho/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/mauricio/Documents/eldespacho/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0c4f75c90b278e24e5a20be10395b3cb1bd0b8f0.jar" />
     </item>
 
 </items>

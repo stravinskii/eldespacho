@@ -19,6 +19,8 @@ import android.widget.ImageView;
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    public static FragmentManager fragmentManager;
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -43,6 +45,7 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        fragmentManager = getSupportFragmentManager();
         //setContentView(R.layout.activity_home);
         /*
         if (savedInstanceState != null) {
