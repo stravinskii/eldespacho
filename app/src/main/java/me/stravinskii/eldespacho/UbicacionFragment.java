@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -27,6 +28,9 @@ public class UbicacionFragment extends Fragment {
     private static GoogleMap mMap;
     private static Double latitude, longitude;
     private final static LatLng ubicacion = new LatLng(19.3544158, -99.24548010000001);
+//    private final static LatLng sportsWorld = new LatLng(19.3530765,-99.2450541);
+//    private final static LatLng tecMonterrey = new LatLng(19.359479,-99.2581272);
+//    private final static LatLng ibero = new LatLng(19.3540736,-99.2555094);
 
     public UbicacionFragment() {
         // Required empty public constructor
@@ -60,9 +64,24 @@ public class UbicacionFragment extends Fragment {
         }
 
         mMap = fragment.getMap();
+
+        /**
+         * TODO: Futura implementación localización del usuario
+         **/
+        /*
+        if (mMap.isMyLocationEnabled()) {
+            Location myLocation = mMap.getMyLocation();;
+            mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                .title("Tu ubicación")
+            );
+        }
+        */
         mMap.addMarker(new MarkerOptions().position(ubicacion)
+//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                 .title("El Despacho")).showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 13));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);
     }
 

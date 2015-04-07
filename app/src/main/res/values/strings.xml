@@ -33,5 +33,11 @@
 
     <string name="notificacion">Notificacion:</string>
 
+    <string name="ubicacion">
+        Ubicación:\n
+        Durazno #5, Privada El Rincón\n
+        Alvaro Obregón, CP. 01590
+    </string>
+
 
 </resources>
