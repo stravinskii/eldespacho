@@ -3,6 +3,12 @@ package me.stravinskii.eldespacho;
 import android.app.Application;
 import android.support.v4.app.Fragment;
 
+import me.stravinskii.eldespacho.fragments.AgendaCitasFragment;
+import me.stravinskii.eldespacho.fragments.AgendarCitaFragment;
+import me.stravinskii.eldespacho.fragments.HorariosFragment;
+import me.stravinskii.eldespacho.fragments.MisCitasFragment;
+import me.stravinskii.eldespacho.fragments.UbicacionFragment;
+
 /**
  * Created by mauricio on 23/03/15.
  */
