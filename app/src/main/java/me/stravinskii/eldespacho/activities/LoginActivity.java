@@ -97,6 +97,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         getLoaderManager().initLoader(0, null, this);
     }
 
+    public void register(View view) {
+        Intent intent = new Intent(this, RegistroActivity.class);
+        startActivity(intent);
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.

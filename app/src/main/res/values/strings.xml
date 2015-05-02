@@ -38,6 +38,7 @@
         Durazno #5, Privada El Rincón\n
         Alvaro Obregón, CP. 01590
     </string>
+    <string name="title_activity_registro">RegistroActivity</string>
 
 
 </resources>

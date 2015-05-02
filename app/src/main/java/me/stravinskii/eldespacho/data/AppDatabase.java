@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -75,17 +76,19 @@ public class AppDatabase extends SQLiteOpenHelper {
         usuarios = new HashMap<String, String>();
         usuarios.put(Usuarios.IDUSUARIO, "INTEGER PRIMARY KEY AUTOINCREMENT");
         usuarios.put(Usuarios.NOMBRE, "TEXT");
-        usuarios.put(Usuarios.APELLIDO, "TEXT NOT NULL");
+        //usuarios.put(Usuarios.APELLIDO, "TEXT NOT NULL");
         usuarios.put(Usuarios.EMAIL, "TEXT NOT NULL");
-        usuarios.put(Usuarios.SALT, "TEXT NOT NULL");
+        //usuarios.put(Usuarios.SALT, "TEXT NOT NULL");
         usuarios.put(Usuarios.PASSWORD, "TEXT NOT NULL");
         usuarios.put(Usuarios.TELEFONO, "TEXT NOT NULL");
 
         // Tipos de notificaciones para el usuario
+        /*
         usuarios.put(Usuarios.NOTIFICACION_SMS, "NUMERIC");
         usuarios.put(Usuarios.NOTIFICACION_APP, "NUMERIC");
         usuarios.put(Usuarios.NOTIFICACION_CALL, "NUMERIC");
         usuarios.put(Usuarios.NOTIFICACION_MAIL, "NUMERIC");
+        */
     };
 
     /**
@@ -111,8 +114,8 @@ public class AppDatabase extends SQLiteOpenHelper {
     static {
         databaseTables = new HashMap<String, Map<String, String>>();
         databaseTables.put(Tables.USUARIOS, usuarios);
-        databaseTables.put(Tables.ADMINISTRADORES, administradores);
-        databaseTables.put(Tables.CITAS, citas);
+        //databaseTables.put(Tables.ADMINISTRADORES, administradores);
+        //databaseTables.put(Tables.CITAS, citas);
     }
 
     /**
@@ -129,16 +132,23 @@ public class AppDatabase extends SQLiteOpenHelper {
             String tableName = table.getKey();
             Map<String, String> tableColumns = table.getValue();
 
-            String createTableQuery = "CREATE DATABASE IF NOT EXISTS " + tableName + " (";
+            String createTableQuery = "CREATE TABLE IF NOT EXISTS " + tableName + " ( ";
 
+            String[] columns = new String[tableColumns.size()];
             for (Map.Entry<String, String> column : tableColumns.entrySet()) {
                 String columnName = column.getKey();
                 String columnType = column.getValue();
 
-                createTableQuery.concat(columnName + " " + columnType + ", ");
+                Log.d("DEBUG", columnName + " " + columnType);
+                //createTableQuery.concat(columnName + " " + columnType + ", ");
+                createTableQuery += columnName + " " + columnType + ", ";
             }
 
-            createTableQuery.concat(")");
+            createTableQuery = createTableQuery.substring(0, createTableQuery.lastIndexOf(','));
+
+            //createTableQuery.concat(")");
+            createTableQuery += ");";
+            Log.d("DEBUG", createTableQuery);
             db.execSQL(createTableQuery);
         }
     }
@@ -147,7 +157,7 @@ public class AppDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         for (Map.Entry<String, Map<String, String>> table : databaseTables.entrySet()) {
             String tableName = table.getKey();
-            String createTableQuery = "DROP TABLE IF EXISTS " + tableName;
+            String createTableQuery = "DROP TABLE IF EXISTS " + tableName + ";";
             db.execSQL(createTableQuery);
         }
         onCreate(db);
