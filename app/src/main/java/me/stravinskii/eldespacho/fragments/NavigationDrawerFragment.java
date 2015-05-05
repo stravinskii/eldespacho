@@ -1,5 +1,6 @@
 package me.stravinskii.eldespacho.fragments;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 
 import me.stravinskii.eldespacho.MyApplication;
 import me.stravinskii.eldespacho.R;
+import me.stravinskii.eldespacho.activities.HomeActivity;
+import me.stravinskii.eldespacho.activities.LoginActivity;
 import me.stravinskii.eldespacho.data.UsuarioEntity;
 
 /**
@@ -94,7 +97,6 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        MyApplication app = ((MyApplication) getActivity().getApplication());
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,10 +105,18 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+
+        MyApplication app = ((MyApplication) getActivity().getApplication());
+        MyApplication.MenuItem[] menu = app.getMenu();
+        String[] mNavigationDrawerMenu = new String[menu.length];
+        for (int i = 0; i < menu.length; i++) {
+            mNavigationDrawerMenu[i] = menu[i].title;
+        }
+
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1, app.getNavigationDrawerMenu()));
+                android.R.id.text1, mNavigationDrawerMenu));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
 
@@ -250,8 +260,17 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.action_login) {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (item.getItemId() == R.id.action_logout) {
+            MyApplication app = (MyApplication) getActivity().getApplication();
+            app.removeUsuario();
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -274,8 +293,8 @@ public class NavigationDrawerFragment extends Fragment {
             //actionBar.setLogo(R.drawable.ic_action_person);
             //actionBar.setIcon(R.drawable.ic_action_person);
             actionBar.setTitle(usuario.getNombre());
-        } else {
-            actionBar.setTitle(R.string.app_name);
+        //} else {
+            //actionBar.setTitle(R.string.app_name);
         }
     }
 

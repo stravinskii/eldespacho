@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import me.stravinskii.eldespacho.activities.LoginActivity;
 import me.stravinskii.eldespacho.data.UsuarioEntity;
 import me.stravinskii.eldespacho.fragments.AgendaCitasFragment;
 import me.stravinskii.eldespacho.fragments.AgendarCitaFragment;
@@ -27,15 +28,6 @@ public class MyApplication extends Application {
 
     private boolean sesion = false;
     private int fragmentReferer = 0;
-    private String tipoDeUsuario = "";
-
-    public String getTipoDeUsuario() {
-        return tipoDeUsuario;
-    }
-
-    public void setTipoDeUsuario(String tipoDeUsuario) {
-        this.tipoDeUsuario = tipoDeUsuario;
-    }
 
     public boolean hasSesion() {
         return sesion;
@@ -53,78 +45,36 @@ public class MyApplication extends Application {
         this.fragmentReferer = fragmentReferer;
     }
 
-    public String[] getNavigationDrawerMenu() {
-        MenuItem item = new MenuItem(0, getString(R.string.title_horarios), HorariosFragment.class);
-        String[] mDrawerMenu;
-        switch (tipoDeUsuario) {
-            case "usuario":
-                mDrawerMenu = new String[]{
-                        getString(R.string.title_horarios),
-                        getString(R.string.title_agendarcita),
-                        getString(R.string.title_miscitas),
-                        getString(R.string.title_ubicacion),
-                        //getString(R.string.title_configuracion),
-                        //getString(R.string.title_cerrarsesion),
-                };
-                break;
-            case "admin":
-                mDrawerMenu = new String[]{
-                        getString(R.string.title_horarios),
-                        getString(R.string.title_miscitas),
-                        //getString(R.string.title_configuracion),
-                        //getString(R.string.title_cerrarsesion),
-                };
-                break;
-            default:
-                mDrawerMenu = new String[]{
-                        getString(R.string.title_horarios),
-                        getString(R.string.title_agendarcita),
-                        getString(R.string.title_ubicacion),
-                };
-                break;
-        }
-        return mDrawerMenu;
-    }
-
-    public Fragment getFragment(int position) {
-        if (tipoDeUsuario.equals("usuario")) {
-            switch (position) {
-                case 0: //Horarios
-                    return new HorariosFragment();
-                case 1: //Agendar Cita
-                    return new AgendarCitaFragment();
-                case 2: //Mis Citas
-                    return new MisCitasFragment();
-                case 3: //Ubicacion
-                    return new UbicacionFragment();
-                case 4: //Configuracion
+    public MenuItem[] getMenu() {
+        MenuItem[] menu = null;
+        if (usuario != null) {
+            switch (usuario.getTipo()) {
+                case "0": // Usuario / Cliente
+                    menu = new MenuItem[] {
+                            new MenuItem(0, "Horarios Disponibles", HorariosFragment.class),
+                            new MenuItem(1, "Agendar Cita", AgendarCitaFragment.class),
+                            new MenuItem(2, "Mis Citas", MisCitasFragment.class),
+                            new MenuItem(3, "Ubicación", UbicacionFragment.class)
+                    };
                     break;
-                case 5: //Cerrar Session
-                    break;
-            }
-        } else if (tipoDeUsuario.equals("admin")) {
-            switch (position) {
-                case 0: //Horarios
-                    return new HorariosFragment();
-                case 1: //Mis Citas
-                    return new AgendaCitasFragment();
-                case 2: //Configuracion
-                    break;
-                case 3: //Cerrar Session
+                case "1": // Usuario / Admin
+                    menu = new MenuItem[] {
+                            new MenuItem(0, "Horarios Disponibles", HorariosFragment.class),
+                            new MenuItem(1, "Mis Citas", MisCitasFragment.class),
+                            //new MenuItem(2, "Precios", UbicacionFragment.class)
+                    };
                     break;
             }
         } else {
-            switch (position) {
-                case 0: //Horarios
-                    return new HorariosFragment();
-                case 1: //Agendar Cita
-                    return new AgendarCitaFragment();
-                case 2: //Ubicacion
-                    return new UbicacionFragment();
-            }
+            menu = new MenuItem[] {
+                    new MenuItem(0, "Horarios Disponibles", HorariosFragment.class),
+                    new MenuItem(1, "Agendar Cita", AgendarCitaFragment.class),
+                    new MenuItem(2, "Ubicación", UbicacionFragment.class),
+                    //new MenuItem(3, "Precios", UbicacionFragment.class)
+                    new MenuItem(3, "Iniciar Sesión", LoginActivity.class)
+            };
         }
-
-        return null;
+        return menu;
     }
 
     public SharedPreferences getSharedPreferences() {
@@ -137,6 +87,10 @@ public class MyApplication extends Application {
 
     public UsuarioEntity getUsuario() {
         return usuario;
+    }
+
+    public void removeUsuario() {
+        usuario = null;
     }
 
     public void setUsuario(UsuarioEntity usuario) {

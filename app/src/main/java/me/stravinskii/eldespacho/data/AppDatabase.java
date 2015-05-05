@@ -1,5 +1,6 @@
 package me.stravinskii.eldespacho.data;
 
+import android.app.ActionBar;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,7 +23,7 @@ public class AppDatabase extends SQLiteOpenHelper {
     /**
      * Versión de la base de datos
      */
-    private final static int databaseVersion = 101;
+    private final static int databaseVersion = 102;
 
     /**
      * Nombre de la base de datos dentro de SQLite
@@ -36,6 +37,7 @@ public class AppDatabase extends SQLiteOpenHelper {
         public static final String USUARIOS = "usuarios";
         public static final String ADMINISTRADORES = "administradores";
         public static final String CITAS = "citas";
+        public static final String PRECIOS = "precios";
     }
 
     /*
@@ -85,6 +87,20 @@ public class AppDatabase extends SQLiteOpenHelper {
 
     private final static Map<String, String> citas = new HashMap<String, String>();
 
+    public interface Precios {
+        public static final String IDPRECIO = "idprecio";
+        public static final String CONCEPTO = "concepto";
+        public static final String PRECIO = "precio";
+    }
+
+    public final static Map<String, String> precios;
+    static {
+        precios = new HashMap<String,String>();
+        precios.put(Precios.IDPRECIO, "INTEGER PRIMARY KEY AUTOINCREMENT");
+        precios.put(Precios.CONCEPTO, "TEXT NOT NULL");
+        precios.put(Precios.PRECIO, "TEXT NOT NULL");
+    }
+
     /**
      * Especificación de las tablas de la base de datos
      */
@@ -92,13 +108,23 @@ public class AppDatabase extends SQLiteOpenHelper {
     static {
         databaseTables = new HashMap<String, Map<String, String>>();
         databaseTables.put(Tables.USUARIOS, usuarios);
+        databaseTables.put(Tables.PRECIOS, precios);
         //databaseTables.put(Tables.ADMINISTRADORES, administradores);
         //databaseTables.put(Tables.CITAS, citas);
     }
 
     public static final String[] seeds = new String[] {
         "INSERT INTO " + Tables.USUARIOS + " (nombre, email, password, telefono, tipo)" +
-                " VALUES ('Sys Admin', 'admin@eldespacho.com', '123456', '56451325', '1')"
+                " VALUES ('Sys Admin', 'admin@eldespacho.com', '123456', '56451325', '1')",
+        "INSERT INTO " + Tables.USUARIOS + " (nombre, email, password, telefono, tipo)" +
+                " VALUES ('Usuario', 'usuario@eldespacho.com', '123456', '56642778', '0')",
+
+        "INSERT INTO " + Tables.PRECIOS + " (concepto, precio)" +
+                " VALUES ('Corte de 10am a 6pm', '$350 x hora')," +
+                " ('Corte de 6pm a 9pm', '$450 x hora')," +
+                " ('Corte de 9pm a 12am', '$550 x hora')," +
+                " ('Corte de 12am a 7am', '$650 x hora')," +
+                " ('Corte de 7am a 10am', '$400 x hora')"
     };
 
     /**

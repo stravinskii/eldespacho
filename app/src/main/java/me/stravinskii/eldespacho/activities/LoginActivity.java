@@ -44,13 +44,6 @@ import me.stravinskii.eldespacho.data.UsuarioEntity;
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "visitante@despacho.com:visitante", "usuario@despacho.com:usuario", "admin@despacho.com:admin"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -158,16 +151,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mAuthTask.execute((Void) null);
             if (mAuthTask.doInBackground()) {
                 MyApplication app = ((MyApplication) this.getApplication());
-                String tipoDeUsuario = email.substring(0, email.indexOf('@'));
-                switch (tipoDeUsuario) {
-                    case "visitante":
-                    case "usuario":
-                    case "admin":
-                        app.setSesion(true);
-                        app.setTipoDeUsuario(tipoDeUsuario);
-                        break;
-                }
-
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 intent.putExtra("fragmentPosition", app.getFragmentReferer());
                 startActivity(intent);

@@ -50,7 +50,6 @@ public class AgendarCitaFragment extends Fragment implements View.OnClickListene
             app.setFragmentReferer(fragmentPosition);
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-            getActivity().finish();
             return null;
         }
     }

@@ -1,6 +1,7 @@
 package me.stravinskii.eldespacho.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -66,69 +67,46 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        MyApplication.MenuItem[] items = new MyApplication.MenuItem[2];
         // update the main content by replacing fragments
-        Fragment fragment = null;
-        switch (position) {
-            case 0: //Horarios
-                mTitle = getString(R.string.title_horarios);
-                fragment = new HorariosFragment();
-                break;
-            case 1: //Agendar Cita
-                mTitle = getString(R.string.title_agendarcita);
-                fragment = new AgendarCitaFragment();
-                break;
-            case 2: //Mis Citas
-                mTitle = getString(R.string.title_miscitas);
-                fragment = new MisCitasFragment();
-                break;
-            case 3: //Ubicacion
-                mTitle = getString(R.string.title_ubicacion);
-                fragment = new UbicacionFragment();
-                break;
-            case 4: //Configuracion
-                break;
-            case 5: //Cerrar Session
-                break;
+        MyApplication app = ((MyApplication) this.getApplication());
+        Fragment fragment = null; Class activity = null;
+        for (MyApplication.MenuItem menuItem : app.getMenu()) {
+            if (menuItem.position == position) {
+                mTitle = menuItem.title;
+
+                try {
+                    if (menuItem.fragment.getSuperclass() == Fragment.class){
+                        fragment = (Fragment) menuItem.fragment.newInstance();
+                    } else {
+                        activity = menuItem.fragment;
+                    }
+                    break;
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-        /*
-        MyApplication app = ((MyApplication) this.getApplication());
-        Fragment fragment = app.getFragment(position);
-        mTitle = app.getNavigationDrawerMenu()[position];
-        */
-
-        MyApplication app = ((MyApplication) this.getApplication());
-        fragment = app.getFragment(position);
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    //.replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                     .replace(R.id.container, fragment)
                     .commit();
+        } else {
+            Intent intent = new Intent(this, activity);
+            startActivity(intent);
         }
     }
 
     public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_horarios);
+        MyApplication app = ((MyApplication) this.getApplication());
+        for (MyApplication.MenuItem menuItem : app.getMenu()) {
+            if (menuItem.position + 1 == number) {
+                mTitle = menuItem.title;
                 break;
-            case 2:
-                mTitle = getString(R.string.title_agendarcita);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_miscitas);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_ubicacion);
-                break;
-            case 5:
-                //mTitle = getString(R.string.title_configuracion);
-                break;
-            case 6:
-                //mTitle = getString(R.string.title_cerrarsesion);
-                break;
+            }
         }
     }
 
@@ -147,6 +125,14 @@ public class HomeActivity extends ActionBarActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.home, menu);
+
+            MyApplication app = ((MyApplication) this.getApplication());
+            if (app.getUsuario() != null) {
+                menu.findItem(R.id.action_login).setVisible(false);
+            } else {
+                menu.findItem(R.id.action_logout).setVisible(false);
+            }
+
             restoreActionBar();
             return true;
         }
