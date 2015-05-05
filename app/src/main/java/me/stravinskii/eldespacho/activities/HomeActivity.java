@@ -60,10 +60,13 @@ public class HomeActivity extends ActionBarActivity
             onNavigationDrawerItemSelected(fragmentPosition);
         }
         */
+
+        //getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+        MyApplication.MenuItem[] items = new MyApplication.MenuItem[2];
         // update the main content by replacing fragments
         Fragment fragment = null;
         switch (position) {

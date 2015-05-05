@@ -5,10 +5,12 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 
@@ -32,6 +34,8 @@ import java.util.List;
 
 import me.stravinskii.eldespacho.MyApplication;
 import me.stravinskii.eldespacho.R;
+import me.stravinskii.eldespacho.data.AppDatabase;
+import me.stravinskii.eldespacho.data.UsuarioEntity;
 
 
 /**
@@ -297,6 +301,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 return false;
             }
 
+            /*
             for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
@@ -304,7 +309,19 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     return pieces[1].equals(mPassword);
                 }
             }
+            */
 
+            MyApplication app = (MyApplication) getApplication();
+            AppDatabase appDB = new AppDatabase(getBaseContext());
+            SQLiteDatabase db = appDB.getWritableDatabase();
+            UsuarioEntity usuario = new UsuarioEntity();
+
+            if (usuario.findByCredential(db, mEmail, mPassword)) {
+                app.setSharedPreferences(getSharedPreferences(
+                    MyApplication.appPreferences, Context.MODE_PRIVATE));
+                app.setUsuario(usuario);
+                return true;
+            }
             // TODO: register the new account here.
             return false;
         }

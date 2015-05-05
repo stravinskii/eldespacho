@@ -22,7 +22,7 @@ public class AppDatabase extends SQLiteOpenHelper {
     /**
      * Versión de la base de datos
      */
-    private final static int databaseVersion = 1;
+    private final static int databaseVersion = 101;
 
     /**
      * Nombre de la base de datos dentro de SQLite
@@ -50,23 +50,14 @@ public class AppDatabase extends SQLiteOpenHelper {
         public static final String PASSWORD = "password";
         public static final String TELEFONO = "telefono";
 
+        /* 0 => cliente | 1 => administrador */
+        public static final String TIPO = "tipo";
+
         public static final String NOTIFICACION_SMS = "notificacion_sms";
         public static final String NOTIFICACION_APP = "notificacion_app";
         public static final String NOTIFICACION_CALL = "notificacion_call";
         public static final String NOTIFICACION_MAIL = "notificacion_mail";
     }
-
-    /*
-     * Columnas para la tabla 'administradores'
-     */
-    public interface Administradores {
-        public static final String IDADMINISTRADOR = "idadministrador";
-        public static final String NOMBRE = "nombre";
-        public static final String APELLIDO = "apellido";
-        public static final String EMAIL = "email";
-        public static final String PASSWORD = "password";
-        public static final String TELEFONO = "telefono";
-    } 
 
     /**
      * Especificación de la tabla 'usuarios'
@@ -81,6 +72,7 @@ public class AppDatabase extends SQLiteOpenHelper {
         //usuarios.put(Usuarios.SALT, "TEXT NOT NULL");
         usuarios.put(Usuarios.PASSWORD, "TEXT NOT NULL");
         usuarios.put(Usuarios.TELEFONO, "TEXT NOT NULL");
+        usuarios.put(Usuarios.TIPO, "TEXT");
 
         // Tipos de notificaciones para el usuario
         /*
@@ -89,20 +81,6 @@ public class AppDatabase extends SQLiteOpenHelper {
         usuarios.put(Usuarios.NOTIFICACION_CALL, "NUMERIC");
         usuarios.put(Usuarios.NOTIFICACION_MAIL, "NUMERIC");
         */
-    };
-
-    /**
-     * Especificación de la tabla 'administradores'
-     */
-    public final static Map<String, String> administradores;
-    static {
-        administradores = new HashMap<String, String>();
-        administradores.put(Administradores.IDADMINISTRADOR, "INTEGER PRIMARY KEY AUTOINCREMENT");
-        administradores.put(Administradores.NOMBRE, "TEXT");
-        administradores.put(Administradores.APELLIDO, "TEXT");
-        administradores.put(Administradores.EMAIL, "TEXT");
-        administradores.put(Administradores.PASSWORD, "TEXT");
-        administradores.put(Administradores.TELEFONO, "TEXT");
     };
 
     private final static Map<String, String> citas = new HashMap<String, String>();
@@ -117,6 +95,11 @@ public class AppDatabase extends SQLiteOpenHelper {
         //databaseTables.put(Tables.ADMINISTRADORES, administradores);
         //databaseTables.put(Tables.CITAS, citas);
     }
+
+    public static final String[] seeds = new String[] {
+        "INSERT INTO " + Tables.USUARIOS + " (nombre, email, password, telefono, tipo)" +
+                " VALUES ('Sys Admin', 'admin@eldespacho.com', '123456', '56451325', '1')"
+    };
 
     /**
      * Constructor de la clase
@@ -150,6 +133,11 @@ public class AppDatabase extends SQLiteOpenHelper {
             createTableQuery += ");";
             Log.d("DEBUG", createTableQuery);
             db.execSQL(createTableQuery);
+        }
+
+        for (String seed : seeds) {
+            Log.d("DEBUG", seed);
+            db.execSQL(seed);
         }
     }
 

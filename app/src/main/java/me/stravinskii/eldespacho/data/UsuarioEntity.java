@@ -29,6 +29,7 @@ public class
     private String nombre;
     private String apellidos;
     private String telefono;
+    private String tipo;
 
     private boolean notificacionSMS;
     private boolean notificacionMAIL;
@@ -47,6 +48,7 @@ public class
         email = parcel.readString();
         //salt = parcel.readString();
         password = parcel.readString();
+        tipo = parcel.readString();
     }
 
     public int getId() {
@@ -119,6 +121,14 @@ public class
         this.notificacionSMS = notificacionSMS;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     /**
      * Busca un registro en la base de datos a un Usuario con un 'id'
      * @param db base de datos en la que se buscará
@@ -136,6 +146,7 @@ public class
             setEmail(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.EMAIL)));
             //setSalt(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.SALT)));
             setPassword(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.PASSWORD)));
+            setTipo(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.TIPO)));
             cursor.close();
             return true;
         }
@@ -152,12 +163,17 @@ public class
      */
     public boolean findByCredential(SQLiteDatabase db, String email, String password) {
         Cursor cursor = db.query(false, AppDatabase.Tables.USUARIOS, null,
-                AppDatabase.Usuarios.EMAIL + " = " + email, null, null, null, null, "1");
-        if (cursor.moveToFirst()) {
-            String salt = cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.SALT));
+                AppDatabase.Usuarios.EMAIL + " = ?", new String[] {email}, null, null, null, "1");
+        if (cursor.getCount() > 0 && cursor.moveToFirst()) {
+            //String salt = cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.SALT));
             String pswd = cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.PASSWORD));
 
             if (password.equals(pswd)) {
+                setId(cursor.getInt(cursor.getColumnIndex(AppDatabase.Usuarios.IDUSUARIO)));
+                setNombre(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.NOMBRE)));
+                setEmail(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.EMAIL)));
+                setPassword(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.PASSWORD)));
+                setTipo(cursor.getString(cursor.getColumnIndex(AppDatabase.Usuarios.TIPO)));
                 cursor.close();
                 return true;
             }
@@ -201,6 +217,7 @@ public class
         //values.put(AppDatabase.Usuarios.SALT, salt);
         values.put(AppDatabase.Usuarios.PASSWORD, password);
         values.put(AppDatabase.Usuarios.TELEFONO, telefono);
+        values.put(AppDatabase.Usuarios.TIPO, "0");
         //values.put(AppDatabase.Usuarios.NOTIFICACION_SMS, notificacionSMS);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_APP, notificacionAPP);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_CALL, notificacionCALL);
@@ -225,6 +242,7 @@ public class
         //values.put(AppDatabase.Usuarios.SALT, salt);
         values.put(AppDatabase.Usuarios.PASSWORD, password);
         values.put(AppDatabase.Usuarios.TELEFONO, telefono);
+        values.put(AppDatabase.Usuarios.TIPO, tipo);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_SMS, notificacionSMS);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_APP, notificacionAPP);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_CALL, notificacionCALL);
@@ -248,6 +266,7 @@ public class
         dest.writeString(email);
         //dest.writeString(salt);
         dest.writeString(password);
+        dest.writeString(tipo);
         /*
         dest.writeBooleanArray(new boolean[] {
                 notificacionAPP,
@@ -271,6 +290,7 @@ public class
             usuario.setEmail(source.readString());
             //usuario.setSalt(source.readString());
             usuario.setPassword(source.readString());
+            usuario.setTipo(source.readString());
             /*
             source.readBooleanArray(notificaciones);
             usuario.setNotificacionAPP(notificaciones[0]);

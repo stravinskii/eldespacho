@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import me.stravinskii.eldespacho.MyApplication;
 import me.stravinskii.eldespacho.R;
+import me.stravinskii.eldespacho.data.UsuarioEntity;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -105,8 +106,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                app.getNavigationDrawerMenu()));
+                android.R.id.text1, app.getNavigationDrawerMenu()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
 
@@ -266,7 +266,17 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
+
+
+        MyApplication app = (MyApplication) getActivity().getApplication();
+        UsuarioEntity usuario = app.getUsuario();
+        if (usuario != null) {
+            //actionBar.setLogo(R.drawable.ic_action_person);
+            //actionBar.setIcon(R.drawable.ic_action_person);
+            actionBar.setTitle(usuario.getNombre());
+        } else {
+            actionBar.setTitle(R.string.app_name);
+        }
     }
 
     private ActionBar getActionBar() {
