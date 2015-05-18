@@ -29,7 +29,7 @@ public class
     private String nombre;
     private String apellidos;
     private String telefono;
-    private String tipo;
+    private String tipo = "0";
 
     private boolean notificacionSMS;
     private boolean notificacionMAIL;
@@ -217,7 +217,7 @@ public class
         //values.put(AppDatabase.Usuarios.SALT, salt);
         values.put(AppDatabase.Usuarios.PASSWORD, password);
         values.put(AppDatabase.Usuarios.TELEFONO, telefono);
-        values.put(AppDatabase.Usuarios.TIPO, "0");
+        values.put(AppDatabase.Usuarios.TIPO, tipo);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_SMS, notificacionSMS);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_APP, notificacionAPP);
         //values.put(AppDatabase.Usuarios.NOTIFICACION_CALL, notificacionCALL);

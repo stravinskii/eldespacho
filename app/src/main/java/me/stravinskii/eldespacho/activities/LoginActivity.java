@@ -303,6 +303,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 app.setSharedPreferences(getSharedPreferences(
                     MyApplication.appPreferences, Context.MODE_PRIVATE));
                 app.setUsuario(usuario);
+                app.setSesion(true);
                 return true;
             }
             // TODO: register the new account here.

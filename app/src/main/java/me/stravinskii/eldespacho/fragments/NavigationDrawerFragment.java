@@ -269,6 +269,7 @@ public class NavigationDrawerFragment extends Fragment {
         if (item.getItemId() == R.id.action_logout) {
             MyApplication app = (MyApplication) getActivity().getApplication();
             app.removeUsuario();
+            app.setSesion(false);
             Intent intent = new Intent(getActivity(), HomeActivity.class);
             startActivity(intent);
             return true;

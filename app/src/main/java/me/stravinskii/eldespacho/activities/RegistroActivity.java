@@ -59,6 +59,7 @@ public class RegistroActivity extends Activity {
                 app.setSharedPreferences(getSharedPreferences(
                         MyApplication.appPreferences, Context.MODE_PRIVATE));
                 app.setUsuario(usuario);
+                app.setSesion(true);
 
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
